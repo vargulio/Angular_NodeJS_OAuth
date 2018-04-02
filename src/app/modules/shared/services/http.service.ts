@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 
-const apiUrl = '';
+const apiUrl = 'http://localhost:3000/';
 
 @Injectable()
 export class HttpService {
@@ -23,12 +23,14 @@ export class HttpService {
     return httpParams;
   }
 
+
   public get(url: string, urlParams: any = {}): Observable<any> {
     const params: HttpParams = this.generateUrlParams(urlParams);
     return this.http.get(apiUrl + url, {
       headers: this.headers,
       params: params,
-      responseType: 'json'
+      responseType: 'json',
+      observe: 'response'
     });
   }
 
