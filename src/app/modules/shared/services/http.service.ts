@@ -6,12 +6,26 @@ const apiUrl = 'http://localhost:3000/';
 
 @Injectable()
 export class HttpService {
-
-
+  
   private headers: HttpHeaders;
+
+  private DEFAULT_REQUEST_OPTIONS = {
+    headers: this.headers,
+    responseType: 'json',
+    withCredentials: true
+  };
+
 
   constructor(public http: HttpClient) {
     this.headers = new HttpHeaders();
+  }
+
+  private generateRequestOptions(newOptionsObj = {})  {
+    const requestOptions = JSON.parse(JSON.stringify(this.DEFAULT_REQUEST_OPTIONS));
+    for (let key in newOptionsObj) {
+      requestOptions[key] = newOptionsObj[key];
+    }
+    return requestOptions;
   }
 
 
@@ -24,40 +38,31 @@ export class HttpService {
   }
 
 
-  public get(url: string, urlParams: any = {}): Observable<any> {
+  public get(url: string, urlParams: any = {}, requestOptions: any = {}): Observable<any> {
     const params: HttpParams = this.generateUrlParams(urlParams);
-    return this.http.get(apiUrl + url, {
-      headers: this.headers,
-      params: params,
-      responseType: 'json',
-      observe: 'response'
-    });
+    requestOptions = this.generateRequestOptions(requestOptions);
+    requestOptions.params = params;
+    return this.http.get(apiUrl + url, requestOptions);
   }
 
-  public post(url: string, data: any = {}, urlParams: any = {}): Observable<any> {
+  public post(url: string, data: any = {}, urlParams: any = {}, requestOptions: any = {}): Observable<any> {
     const params: HttpParams = this.generateUrlParams(urlParams);
-    return this.http.post(apiUrl + url, data, {
-      headers: this.headers,
-      params: params,
-      responseType: 'json'
-    });
+    requestOptions = this.generateRequestOptions(requestOptions);
+    requestOptions.params = params;
+    return this.http.post(apiUrl + url, data,requestOptions);
   }
 
-  public put(url: string, data: any = {}, urlParams: any = {}): Observable<any> {
+  public put(url: string, data: any = {}, urlParams: any = {}, requestOptions: any = {}): Observable<any> {
     const params: HttpParams = this.generateUrlParams(urlParams);
-    return this.http.put(apiUrl + url, data, {
-      headers: this.headers,
-      params: params,
-      responseType: 'json'
-    });
+    requestOptions = this.generateRequestOptions(requestOptions);
+    requestOptions.params = params;
+    return this.http.put(apiUrl + url, data, requestOptions);
   }
 
-  public delete(url: string, urlParams: any = {}): Observable<any> {
+  public delete(url: string, urlParams: any = {}, requestOptions: any = {}): Observable<any> {
     const params: HttpParams = this.generateUrlParams(urlParams);
-    return this.http.delete(apiUrl + url, {
-      headers: this.headers,
-      params: params,
-      responseType: 'json'
-    });
+    requestOptions = this.generateRequestOptions(requestOptions);
+    requestOptions.params = params;
+    return this.http.delete(apiUrl + url,requestOptions);
   }
 }

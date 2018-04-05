@@ -19,4 +19,10 @@ export class GoogleRedirectHandler {
     })
   }
 
+  hitProfileOnServer() {
+    this.httpService.get('profile').toPromise().then(data => {
+      console.log(data);
+    })
+  }
+
 }
