@@ -6,7 +6,7 @@ const apiUrl = 'http://localhost:3000/';
 
 @Injectable()
 export class HttpService {
-  
+
   private headers: HttpHeaders;
 
   private DEFAULT_REQUEST_OPTIONS = {
