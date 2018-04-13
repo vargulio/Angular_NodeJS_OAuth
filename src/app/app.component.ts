@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CookieService } from "angular2-cookie/core";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(private cookieService: CookieService) {
+    console.log(this.cookieService.get('biscuit'));
+  }
 }

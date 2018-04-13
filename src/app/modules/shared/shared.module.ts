@@ -1,11 +1,10 @@
 import { NgModule } from "@angular/core";
-import { HttpService } from "./index";
+import { HttpService, HeaderComponent, CookieService, CookieOptions } from "./index";
 
 @NgModule({
-  declarations: [],
-  exports: [],
-  providers: [HttpService]
+  declarations: [HeaderComponent],
+  exports: [HeaderComponent],
+  providers: [HttpService, { provide: CookieOptions, useValue: {} },CookieService]
 })
 export class SharedModule {
-
 }

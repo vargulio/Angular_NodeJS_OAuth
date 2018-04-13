@@ -1,3 +1,16 @@
-div {
-    color: red;
+.background {
+    background: url("../../../assets/images/bg-masthead.jpg") no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: block;
+}
+
+.container {
+    height: fill-available;
+    display: flex;
+    align-items: center;
+}
+.home-page-heading {
+    font-family: 'UbuntuMono', monospace;
+    font-size: 48px;
 }
