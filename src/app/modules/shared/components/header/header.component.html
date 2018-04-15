@@ -1,5 +1,6 @@
 <div class="header-container">
 
-    <button type="button" (click)="printCookie()" class="btn btn-danger">Login</button>
+    <button type="button" *ngIf="!isUserLoggedIn" [routerLink]="'/auth/login'" class="btn btn-danger">Login</button>
+    <button type="button" *ngIf="isUserLoggedIn" (click)="logoutUser()" class="btn btn-danger">Logout</button>
 
 </div>

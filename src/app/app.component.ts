@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CookieService } from "angular2-cookie/core";
+import { AuthenticationService } from "./modules/shared";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { CookieService } from "angular2-cookie/core";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private cookieService: CookieService) {
-    console.log(this.cookieService.get('biscuit'));
+  constructor(private authService: AuthenticationService) {
+    this.authService.checkForExistingCookie();
   }
 }

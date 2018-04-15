@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { HttpService } from "../../../shared";
+import { HttpService, AuthenticationService } from "../../../shared";
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -7,15 +8,13 @@ import { HttpService } from "../../../shared";
 })
 export class LoginComponent {
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private authService: AuthenticationService
+  ) {}
 
 
   public googleLogin() {
-    window.open('https://accounts.google.com/o/oauth2/v2/auth?' +
-      'scope=profile&' +
-      'include_granted_scopes=true&' +
-      'redirect_uri=http://localhost:4200/auth/redirect&' +
-      'response_type=token&' +
-      'client_id=1019596094868-e9mcrqafvqsrg5hbatrgmmi84vfsvlpr.apps.googleusercontent.com', '_self');
+    this.authService.googleLogin();
   }
 }
