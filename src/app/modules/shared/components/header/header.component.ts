@@ -7,15 +7,14 @@ import { UserDataService, AuthenticationService } from "../../index";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
-  public isUserLoggedIn: boolean = false;
-
+  public user: any = null;
 
   constructor(
     private userDataService: UserDataService,
   private authService: AuthenticationService) {
     this.userDataService.userChangeObservable.subscribe(updatedUser => {
-      this.isUserLoggedIn = !!updatedUser.id;
+      this.user = updatedUser;
+      console.log(this.user);
     })
   }
 

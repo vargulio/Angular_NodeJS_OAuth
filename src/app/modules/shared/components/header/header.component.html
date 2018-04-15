@@ -1,6 +1,9 @@
 <div class="header-container">
 
-    <button type="button" *ngIf="!isUserLoggedIn" [routerLink]="'/auth/login'" class="btn btn-danger">Login</button>
-    <button type="button" *ngIf="isUserLoggedIn" (click)="logoutUser()" class="btn btn-danger">Logout</button>
-
+    <button type="button" *ngIf="!user?.id" [routerLink]="'/auth/login'" class="btn btn-danger">Login</button>
+    <button type="button" *ngIf="user?.id" (click)="logoutUser()" class="btn btn-danger">Logout</button>
+    <div class="float-right">
+        <span *ngIf="user?.userName">Hi, {{user.userName}}</span>
+        <img *ngIf="user?.image?.url" [src]="user.image.url" class="profile-pic" alt="" width="50" height="50">
+    </div>
 </div>

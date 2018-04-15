@@ -34,7 +34,7 @@ export class AuthenticationService {
   public googleRedirectHandler(token) {
     this.httpService.get(`login?${token}`).toPromise().then(data => {
       console.log("Here", data);
-      this.userDataService.setUser(data.username, data._id);
+      this.userDataService.setUser(data);
       this.router.navigate(['/']);
     }).catch(error => {
       console.error('Login was not successful');
@@ -46,7 +46,7 @@ export class AuthenticationService {
     if (existingCookie) {
       this.httpService.get('profile').toPromise().then(data => {
         console.log('biscuit', data);
-        this.userDataService.setUser(data.username, data._id);
+        this.userDataService.setUser(data);
       }).catch(error => {
         console.log('HERE: ', error);
       })

@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AuthenticationService, HttpService } from "../../../shared";
 
 @Component({
-  templateUrl: './google-redirect-handler.html'
+  template: ''
 })
 export class GoogleRedirectHandler {
 
