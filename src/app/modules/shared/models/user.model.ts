@@ -7,7 +7,7 @@ export class User {
   constructor(
     userName: string = null,
     id: string = null,
-    image: any
+    image: any = null
   ) {
     this.userName = userName;
     this.id = id;

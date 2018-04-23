@@ -1,5 +1,4 @@
 <div class="header-container">
-
     <button type="button" *ngIf="!user?.id" [routerLink]="'/auth/login'" class="btn btn-danger">Login</button>
     <button type="button" *ngIf="user?.id" (click)="logoutUser()" class="btn btn-danger">Logout</button>
     <div class="float-right">

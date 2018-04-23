@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CookieService } from "angular2-cookie/core";
 import { HttpService, UserDataService } from "../index";
 import { Router } from "@angular/router";
-
+import { Keys } from '../../../../config/keys';
 @Injectable()
 export class AuthenticationService {
 
@@ -14,12 +14,12 @@ export class AuthenticationService {
   ) {}
 
   public googleLogin() {
-    window.open('https://accounts.google.com/o/oauth2/v2/auth?' +
-      'scope=profile&' +
+    window.open(Keys.google.url+'?' +
+      'scope='+Keys.google.scope+'&' +
       'include_granted_scopes=true&' +
-      'redirect_uri=http://localhost:4200/auth/redirect&' +
-      'response_type=token&' +
-      'client_id=1019596094868-e9mcrqafvqsrg5hbatrgmmi84vfsvlpr.apps.googleusercontent.com', '_self');
+      'redirect_uri='+Keys.google.redirectUrl+'&' +
+      'response_type='+Keys.google.responseType+'&' +
+      'client_id='+Keys.google.clientId, '_self');
   }
 
   public logout() {
@@ -52,6 +52,4 @@ export class AuthenticationService {
       })
     }
   }
-
-
 }

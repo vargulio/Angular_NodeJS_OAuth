@@ -13,7 +13,6 @@ export class LoginComponent {
     private authService: AuthenticationService
   ) {}
 
-
   public googleLogin() {
     this.authService.googleLogin();
   }
