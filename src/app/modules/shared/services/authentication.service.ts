@@ -3,8 +3,12 @@ import { CookieService } from "angular2-cookie/core";
 import { HttpService, UserDataService } from "../index";
 import { Router } from "@angular/router";
 import { Keys } from '../../../../config/keys';
+import { API } from '../../../../config/api';
+
 @Injectable()
 export class AuthenticationService {
+
+  private REDIRECT_AFTER_LOGIN: '/';
 
   constructor(
     private cookieService: CookieService,
@@ -14,17 +18,17 @@ export class AuthenticationService {
   ) {}
 
   public googleLogin() {
-    window.open(Keys.google.url+'?' +
-      'scope='+Keys.google.scope+'&' +
+    window.open(Keys.google.url + '?' +
+      'scope=' + Keys.google.scope + '&' +
       'include_granted_scopes=true&' +
-      'redirect_uri='+Keys.google.redirectUrl+'&' +
-      'response_type='+Keys.google.responseType+'&' +
-      'client_id='+Keys.google.clientId, '_self');
+      'redirect_uri=' + Keys.google.redirectUrl + '&' +
+      'response_type=' + Keys.google.responseType + '&' +
+      'client_id=' + Keys.google.clientId, '_self');
   }
 
   public logout() {
-    this.httpService.get('logout').toPromise().then(data => {
-      this.cookieService.remove('biscuit');
+    this.httpService.get(API.requests.authenticate.LOGOUT).toPromise().then(data => {
+      this.cookieService.remove(Keys.google.cookieKey);
       this.userDataService.setUser();
     }).catch(error => {
       console.log('HERE: ', error);
@@ -32,20 +36,18 @@ export class AuthenticationService {
   }
 
   public googleRedirectHandler(token) {
-    this.httpService.get(`login?${token}`).toPromise().then(data => {
-      console.log("Here", data);
+    this.httpService.get(`${API.requests.authenticate.LOGIN}?${token}`).toPromise().then(data => {
       this.userDataService.setUser(data);
-      this.router.navigate(['/']);
+      this.router.navigate([this.REDIRECT_AFTER_LOGIN]);
     }).catch(error => {
       console.error('Login was not successful');
     })
   }
 
   public checkForExistingCookie() {
-    let existingCookie = this.cookieService.get('biscuit');
+    let existingCookie = this.cookieService.get(Keys.google.cookieKey);
     if (existingCookie) {
-      this.httpService.get('profile').toPromise().then(data => {
-        console.log('biscuit', data);
+      this.httpService.get(API.requests.profile.GET_PROFILE).toPromise().then(data => {
         this.userDataService.setUser(data);
       }).catch(error => {
         console.log('HERE: ', error);

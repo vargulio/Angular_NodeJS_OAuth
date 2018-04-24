@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
+import  { API } from '../../../../config/api';
 
-const apiUrl = 'http://localhost:3000/';
+const apiUrl = API.url;
 
 @Injectable()
 export class HttpService {

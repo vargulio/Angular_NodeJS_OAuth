@@ -4,6 +4,7 @@ export const Keys = {
     scope: 'profile',
     redirectUrl: 'http://localhost:4200/auth/redirect',
     responseType: 'token',
-    clientId: '1019596094868-e9mcrqafvqsrg5hbatrgmmi84vfsvlpr.apps.googleusercontent.com'
+    clientId: '1019596094868-e9mcrqafvqsrg5hbatrgmmi84vfsvlpr.apps.googleusercontent.com',
+    cookieKey: 'biscuit'
   }
 };
