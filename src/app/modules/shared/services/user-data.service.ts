@@ -10,17 +10,12 @@ export class UserDataService {
   public userChange: Subject<any> = new Subject<any>();
   public userChangeObservable = this.userChange.asObservable();
 
-  constructor() {console.log("NOW CONSTRUCTING");}
-
   public setUser(user: any = {}): void {
-
     this.currentLoggedUser = new User(user.username, user._id, user.image);
     this.userChange.next(this.currentLoggedUser);
-    console.log('bahur', this.currentLoggedUser);
   }
 
   public getUser(): User {
     return this.currentLoggedUser;
   }
-
 }

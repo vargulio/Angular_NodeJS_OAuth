@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpService } from "../shared";
+import { HttpService } from "../../shared";
 
 @Component({
   selector: 'home-component',

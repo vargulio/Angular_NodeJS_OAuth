@@ -1,3 +1,4 @@
+/* Here is all API related data */
 export const API = {
   url: 'http://localhost:3000/',
   requests: {

@@ -22,15 +22,7 @@ export class GoogleRedirectHandler {
     this.authService.googleRedirectHandler(this.activatedRoute.snapshot.fragment);
   }
 
-  hitProfileOnServer() {
-    this.httpService.get(API.requests.profile.GET_PROFILE).toPromise().then(data => {
-      console.log(data);
-    }).catch(error => {
-      console.log('HERE: ', error);
-    })
-  }
-
-  logout() {
+  public logout(): void {
     this.authService.logout();
   }
 }

@@ -8,7 +8,7 @@ import { API } from '../../../../config/api';
 @Injectable()
 export class AuthenticationService {
 
-  private REDIRECT_AFTER_LOGIN: '/';
+  public REDIRECT_AFTER_LOGIN = '/';
 
   constructor(
     private cookieService: CookieService,
@@ -26,7 +26,7 @@ export class AuthenticationService {
       'client_id=' + Keys.google.clientId, '_self');
   }
 
-  public logout() {
+  public logout(): void {
     this.httpService.get(API.requests.authenticate.LOGOUT).toPromise().then(data => {
       this.cookieService.remove(Keys.google.cookieKey);
       this.userDataService.setUser();
@@ -35,7 +35,7 @@ export class AuthenticationService {
     });
   }
 
-  public googleRedirectHandler(token) {
+  public googleRedirectHandler(token): void {
     this.httpService.get(`${API.requests.authenticate.LOGIN}?${token}`).toPromise().then(data => {
       this.userDataService.setUser(data);
       this.router.navigate([this.REDIRECT_AFTER_LOGIN]);
@@ -44,7 +44,7 @@ export class AuthenticationService {
     })
   }
 
-  public checkForExistingCookie() {
+  public checkForExistingCookie(): void {
     let existingCookie = this.cookieService.get(Keys.google.cookieKey);
     if (existingCookie) {
       this.httpService.get(API.requests.profile.GET_PROFILE).toPromise().then(data => {

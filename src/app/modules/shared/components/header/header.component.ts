@@ -11,18 +11,15 @@ export class HeaderComponent {
 
   constructor(
     private userDataService: UserDataService,
-  private authService: AuthenticationService) {
+    private authService: AuthenticationService
+  ) {
+    /* Here we subscribe to change in the user, so we can update the header acordingly. */
     this.userDataService.userChangeObservable.subscribe(updatedUser => {
       this.user = updatedUser;
-      console.log(this.user);
     })
   }
 
-  printCookie() {
-    console.log(document.cookie);
-  }
-
-  logoutUser(){
+  public logoutUser(): void {
     this.authService.logout();
   }
 }

@@ -16,19 +16,17 @@ export class HttpService {
     withCredentials: true
   };
 
-
   constructor(public http: HttpClient) {
     this.headers = new HttpHeaders();
   }
 
-  private generateRequestOptions(newOptionsObj = {})  {
+  private generateRequestOptions(newOptionsObj = {}): any {
     const requestOptions = JSON.parse(JSON.stringify(this.DEFAULT_REQUEST_OPTIONS));
     for (let key in newOptionsObj) {
       requestOptions[key] = newOptionsObj[key];
     }
     return requestOptions;
   }
-
 
   private generateUrlParams(params: any): HttpParams {
     let httpParams: HttpParams = new HttpParams();
@@ -37,7 +35,6 @@ export class HttpService {
     }
     return httpParams;
   }
-
 
   public get(url: string, urlParams: any = {}, requestOptions: any = {}): Observable<any> {
     const params: HttpParams = this.generateUrlParams(urlParams);
@@ -50,7 +47,7 @@ export class HttpService {
     const params: HttpParams = this.generateUrlParams(urlParams);
     requestOptions = this.generateRequestOptions(requestOptions);
     requestOptions.params = params;
-    return this.http.post(apiUrl + url, data,requestOptions);
+    return this.http.post(apiUrl + url, data, requestOptions);
   }
 
   public put(url: string, data: any = {}, urlParams: any = {}, requestOptions: any = {}): Observable<any> {
@@ -64,6 +61,6 @@ export class HttpService {
     const params: HttpParams = this.generateUrlParams(urlParams);
     requestOptions = this.generateRequestOptions(requestOptions);
     requestOptions.params = params;
-    return this.http.delete(apiUrl + url,requestOptions);
+    return this.http.delete(apiUrl + url, requestOptions);
   }
 }
